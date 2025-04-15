@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NOTE</string>
+
+    <string-array name="Ranking">
+        <item>Ranking</item>
+        <item>Title</item>
+        <item>Date created</item>
+        <item>Date modified</item>
+    </string-array>
 </resources>
