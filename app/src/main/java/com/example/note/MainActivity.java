@@ -11,7 +11,6 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -163,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
             noteList.clear();
             for (DocumentSnapshot doc : value.getDocuments()) {
                 Note note = doc.toObject(Note.class);
+                note.setId(doc.getId());  // Set note ID
                 noteList.add(note);
             }
             adapter.notifyDataSetChanged();
