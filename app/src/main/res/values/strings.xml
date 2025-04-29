@@ -1,10 +1,33 @@
 <resources>
-    <string name="app_name">NOTE</string>
+    <string name="app_name">Note Pro</string>
+    <string name="Welcome">Welcome</string>
+    <string name="get_started">Get Started</string>
 
+    <!-- Registration -->
+    <string name="full_name_hint">Enter Full Name</string>
+    <string name="email_hint">Enter Email</string>
+    <string name="password_hint">Enter Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_with">Sign in With</string>
+    <string name="already_have_account">Already have an account?</string>
+
+    <!-- Login -->
+    <string name="log_in">Log in</string>
+    <string name="log_in_with">Log in With</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="remember_me">Remember me</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="no_account">Dont have an account ?</string>
+
+    <string name="search_hint">Search for Note</string>
+    <string name="add_note_description">Add Note</string>
+    <string name="all_notes">All Note</string>
     <string-array name="Ranking">
-        <item>Ranking</item>
-        <item>Title</item>
-        <item>Date created</item>
-        <item>Date modified</item>
+        <item>Newest</item>
+        <item>Oldest</item>
+        <item>A-Z</item>
+        <item>Z-A</item>
     </string-array>
+
+
 </resources>

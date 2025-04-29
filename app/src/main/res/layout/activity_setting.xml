@@ -37,16 +37,16 @@
 
     <LinearLayout
         android:id="@+id/menuItems"
-        android:layout_width="332dp"
-        android:layout_height="486dp"
+        android:layout_width="350dp"
+        android:layout_height="338dp"
         android:orientation="vertical"
         android:paddingTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back"
-        app:layout_constraintVertical_bias="0.277">
+        app:layout_constraintVertical_bias="0.233">
 
         <LinearLayout
             android:id="@+id/theme"

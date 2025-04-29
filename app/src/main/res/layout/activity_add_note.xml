@@ -6,56 +6,46 @@
 
  <androidx.constraintlayout.widget.ConstraintLayout
      android:layout_width="match_parent"
-     android:layout_height="match_parent"
+     android:layout_height="wrap_content"
      android:padding="16dp">
+
+  <ImageView
+      android:id="@+id/back"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      app:srcCompat="@drawable/back"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
 
   <EditText
       android:id="@+id/note_title"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="44dp"
+      android:layout_marginTop="16dp"
       android:background="@null"
-      android:focusable="true"
-      android:focusableInTouchMode="true"
       android:hint="Title"
       android:inputType="textCapSentences"
       android:minHeight="48dp"
       android:textAlignment="center"
       android:textSize="20sp"
       android:textStyle="bold"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintTop_toBottomOf="@id/back"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintEnd_toEndOf="parent" />
 
   <EditText
       android:id="@+id/note_content"
       android:layout_width="0dp"
-      android:layout_height="0dp"
+      android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
       android:background="@null"
-      android:gravity="top"
+      android:hint="Write your note here..."
       android:inputType="textMultiLine"
-      android:overScrollMode="always"
-      android:scrollbars="vertical"
+      android:gravity="start|top"
+      android:minHeight="400dp"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/note_title"
-      android:focusable="true"
-      android:focusableInTouchMode="true"
-      tools:ignore="SpeakableTextPresentCheck" />
-
-  <ImageView
-      android:id="@+id/back"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:layout_marginTop="24dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/back" />
+      app:layout_constraintEnd_toEndOf="parent" />
  </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+    <string name="app_name">Note Pro</string>
+        <string name="Welcome">Bienvenu</string>
+        <string name="get_started">Commencer</string>
+
+        <!-- Registration -->
+        <string name="full_name_hint">Entrez le nom complet</string>
+        <string name="email_hint">Entrez le-mail</string>
+        <string name="password_hint">Entrez le mot de passe</string>
+        <string name="sign_up">Créer un compte</string>
+        <string name="sign_in_with">Créer un compte avec</string>
+        <string name="already_have_account">Vous avez déjà un compte ?</string>
+
+        <!-- Login -->
+        <string name="log_in">Se connecter</string>
+        <string name="log_in_with">Se connecter avec</string>
+        <string name="forget_password">Mot de passe oublié ?</string>
+        <string name="remember_me">Se souvenir de moi</string>
+        <string name="welcome_back">Bon retour !</string>
+        <string name="no_account">Vous n’avez pas de compte ?</string>
+
+    <string name="search_hint">Rechercher une note</string>
+    <string name="add_note_description">Ajouter une note</string>
+    <string name="all_notes">Toutes les notes</string>
+    <string-array name="Ranking">
+        <item>Le plus récent</item>
+        <item>Le plus ancien</item>
+        <item>A-Z</item>
+        <item>Z-A</item>
+    </string-array>
+
+</resources>
+
+
