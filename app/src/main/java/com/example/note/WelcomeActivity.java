@@ -22,9 +22,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-
-    EditText emailEditText, passwordEditText;
-    CheckBox rememberCheckBox;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -36,8 +33,8 @@ public class WelcomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        Button signin = findViewById(R.id.btn_signin); // تسجيل الدخول
-        signin.setOnClickListener(view -> showBottomSheetsignin()); // صححنا التسمية
+        Button signin = findViewById(R.id.btn_signin);
+        signin.setOnClickListener(view -> showBottomSheetsignin());
 
         Button login = findViewById(R.id.btn_login);
         login.setOnClickListener(view -> showBottomSheetLogin());
@@ -77,14 +74,13 @@ public class WelcomeActivity extends AppCompatActivity {
                 if (emailTxt.isEmpty() || passTxt.isEmpty()) {
                     Toast.makeText(this, "Enter Email and Password", Toast.LENGTH_SHORT).show();
                 } else {
-                    // التعامل مع Remember Me
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     if (remember != null && remember.isChecked()) {
                         editor.putString("email", emailTxt);
                         editor.putString("password", passTxt);
                         editor.putBoolean("rememberMe", true);
                     } else {
-                        editor.clear(); // نحذف كل شيء
+                        editor.clear();
                     }
                     editor.apply();
 
@@ -124,14 +120,14 @@ public class WelcomeActivity extends AppCompatActivity {
     }
     private void showBottomSheetLogin() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.bottom_sheet_login_layout); // إنشاء حساب
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_login_layout);
         bottomSheetDialog.setCanceledOnTouchOutside(true);
 
         EditText fullname = bottomSheetDialog.findViewById(R.id.fullname);
         EditText emailEdit = bottomSheetDialog.findViewById(R.id.email);
         EditText passwordEdit = bottomSheetDialog.findViewById(R.id.password);
         Button LoginBtn = bottomSheetDialog.findViewById(R.id.btnLogin);
-        Button goToSignin = bottomSheetDialog.findViewById(R.id.signin); // تغيير التسمية للتوضيح
+        Button goToSignin = bottomSheetDialog.findViewById(R.id.signin);
 
         if (LoginBtn != null) {
             LoginBtn.setOnClickListener(view -> {
@@ -151,14 +147,13 @@ public class WelcomeActivity extends AppCompatActivity {
         if (goToSignin != null) {
             goToSignin.setOnClickListener(view -> {
                 bottomSheetDialog.dismiss();
-                showBottomSheetsignin(); // التنقل الصحيح لتسجيل الدخول
+                showBottomSheetsignin();
             });
         }
 
         bottomSheetDialog.show();
     }
 
-    // دالة تسجيل مستخدم جديد
     private void registerUser(String name, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
@@ -183,9 +178,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 });
     }
 
-    // دالة تسجيل الدخول
     private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
+
                 .addOnSuccessListener(authResult -> {
                     Toast.makeText(this, "You are logged in", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, MainActivity.class));

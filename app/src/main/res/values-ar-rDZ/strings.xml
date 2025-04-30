@@ -30,6 +30,11 @@
                 <item>من أ إلى ي</item>
                 <item>من ي إلى أ</item>
         </string-array>
+        <string name="archive">الأرشيف</string>
+        <string name="recycle_bin">المهملات</string>
+        <string name="caregory">تصنيفات</string>
+        <string name="logout">تسجيل الخروج</string>
+        <string name="settings">الاعدادات</string>
 
 </resources>
 

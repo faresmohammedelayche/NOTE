@@ -74,6 +74,8 @@ public class AddNoteActivity extends AppCompatActivity {
         note.put("title", title);
         note.put("content", content);
         note.put("timestamp", FieldValue.serverTimestamp());
+        note.put("archived", false);
+        note.put("deleted", false);
 
         noteRef.set(note).addOnSuccessListener(unused ->
                 Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()

@@ -45,6 +45,35 @@ public class EditNoteActivity extends AppCompatActivity {
         contentEditText = findViewById(R.id.note_content);
         backButton = findViewById(R.id.back);
 
+        ImageView archiveButton = findViewById(R.id.add_archive);
+        ImageView deleteButton = findViewById(R.id.add_delete);
+        ImageView categoryButton = findViewById(R.id.add_category);
+
+        archiveButton.setOnClickListener(v -> {
+            noteRef.update("archived", true)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Note archived", Toast.LENGTH_SHORT).show();
+                        finish(); // الخروج من الشاشة بعد الأرشفة
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to archive note", Toast.LENGTH_SHORT).show();
+                    });
+        });
+
+        deleteButton.setOnClickListener(v -> {
+            noteRef.update("deleted", true)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Note moved to trash", Toast.LENGTH_SHORT).show();
+                        finish(); // الخروج بعد النقل إلى المحذوفات
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Failed to delete note", Toast.LENGTH_SHORT).show();
+                    });
+        });
+
+
+
+
         firestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -127,4 +156,6 @@ public class EditNoteActivity extends AppCompatActivity {
             handler.postDelayed(saveRunnable, 1000);  // Auto-save after 1 second of idle time
         }
     };
+
+
 }

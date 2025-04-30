@@ -30,6 +30,11 @@
         <item>A-Z</item>
         <item>Z-A</item>
     </string-array>
+    <string name="archive">Archive</string>
+    <string name="recycle_bin">Poubelle</string>
+    <string name="caregory">catégorie</string>
+    <string name="logout">se déconnecter</string>
+    <string name="settings">Parametes</string>
 
 </resources>
 

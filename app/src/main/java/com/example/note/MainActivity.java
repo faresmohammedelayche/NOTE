@@ -38,26 +38,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize UI elements
         ImageView menu = findViewById(R.id.menu);
         FloatingActionButton addNote = findViewById(R.id.add_note_button);
         recyclerView = findViewById(R.id.notes_recyclerview);
-        sortSpinner = findViewById(R.id.spinner); // Spinner for sorting
+        sortSpinner = findViewById(R.id.spinner);
 
-        // Set up RecyclerView
+
         noteList = new ArrayList<>();
         adapter = new NoteAdapter(noteList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
 
-        // Firebase Setup
+
         firestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // Load notes with default sorting
+
         loadNotes("newest");
 
-        // Set up Spinner for sorting
+
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.Ranking, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,16 +66,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String sortOption = getSortOption(position);
-                loadNotes(sortOption);  // Load notes with the selected sort option
+                loadNotes(sortOption);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Handle case when nothing is selected, if needed
             }
         });
 
-        // Menu and Add Note actions
         menu.setOnClickListener(view -> showSideSheet());
         addNote.setOnClickListener(view -> goToAdd());
     }
@@ -121,48 +118,38 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadNotes(String sortOption) {
         String userId = firebaseAuth.getCurrentUser().getUid();
-        Query query;
+        Query baseQuery = firestore.collection("Users")
+                .document(userId)
+                .collection("notes")
+                .whereEqualTo("archived", false)
+                .whereEqualTo("deleted", false);
+        Query finalQuery;
 
         switch (sortOption) {
             case "a_to_z":
-                query = firestore.collection("Users")
-                        .document(userId)
-                        .collection("notes")
-                        .orderBy("title", Query.Direction.ASCENDING);
+                finalQuery = baseQuery.orderBy("title", Query.Direction.ASCENDING);
                 break;
             case "z_to_a":
-                query = firestore.collection("Users")
-                        .document(userId)
-                        .collection("notes")
-                        .orderBy("title", Query.Direction.DESCENDING);
+                finalQuery = baseQuery.orderBy("title", Query.Direction.DESCENDING);
                 break;
             case "newest":
-                query = firestore.collection("Users")
-                        .document(userId)
-                        .collection("notes")
-                        .orderBy("timestamp", Query.Direction.DESCENDING);
+                finalQuery = baseQuery.orderBy("timestamp", Query.Direction.DESCENDING);
                 break;
             case "oldest":
-                query = firestore.collection("Users")
-                        .document(userId)
-                        .collection("notes")
-                        .orderBy("timestamp", Query.Direction.ASCENDING);
+                finalQuery = baseQuery.orderBy("timestamp", Query.Direction.ASCENDING);
                 break;
             default:
-                query = firestore.collection("Users")
-                        .document(userId)
-                        .collection("notes")
-                        .orderBy("timestamp", Query.Direction.DESCENDING);
+                finalQuery = baseQuery.orderBy("timestamp", Query.Direction.DESCENDING);
                 break;
         }
 
-        query.addSnapshotListener((value, error) -> {
-            if (error != null) return;
+        finalQuery.addSnapshotListener((value, error) -> {
+            if (error != null || value == null) return;
 
             noteList.clear();
             for (DocumentSnapshot doc : value.getDocuments()) {
                 Note note = doc.toObject(Note.class);
-                note.setId(doc.getId());  // Set note ID
+                note.setId(doc.getId());
                 noteList.add(note);
             }
             adapter.notifyDataSetChanged();
@@ -172,15 +159,15 @@ public class MainActivity extends AppCompatActivity {
     private String getSortOption(int position) {
         switch (position) {
             case 0:
-                return "a_to_z";  // Sort by A to Z
+                return "a_to_z";
             case 1:
-                return "z_to_a";  // Sort by Z to A
+                return "z_to_a";
             case 2:
-                return "newest";  // Sort by Newest
+                return "newest";
             case 3:
-                return "oldest";  // Sort by Oldest
+                return "oldest";
             default:
-                return "newest";  // Default to Newest
+                return "newest";
         }
     }
 }

@@ -6,7 +6,7 @@ public class Note {
     private String content;
 
     public Note() {
-        // Required empty constructor for Firebase
+
     }
 
     public Note(String id, String title, String content) {
